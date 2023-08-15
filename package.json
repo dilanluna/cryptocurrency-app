@@ -1,0 +1,26 @@
+{
+  "name": "cryptocurrency",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/main.tsx",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "expo": "~49.0.7",
+    "expo-status-bar": "~1.6.0",
+    "react": "18.2.0",
+    "react-native": "0.72.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "^18.2.20",
+    "prettier": "^3.0.1",
+    "typescript": "^5.1.6"
+  }
+}
