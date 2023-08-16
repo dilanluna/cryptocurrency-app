@@ -1,5 +1,5 @@
+import { useCoins } from './crypto-api';
 import { FlatList, Image, Text, View } from 'react-native';
-import useCoinGeckoEndpoint from './use-coingecko-endpoint';
 import { formatCurrency, formatPercet } from './number-format';
 
 function Separator() {
@@ -48,13 +48,13 @@ function CoinItem({ coin }: { coin: CoinMarket }) {
 }
 
 export default function CoinList() {
-  const { data: coins } = useCoinGeckoEndpoint<CoinMarket[]>(
-    'coins/markets?vs_currency=usd&per_page=10&price_change_percentage=1h',
-  );
+  const { data, refetch, isFetching, fetchNextPage } = useCoins();
 
   return (
     <FlatList
-      data={coins || []}
+      onRefresh={refetch}
+      refreshing={isFetching}
+      data={data.pages.flat()}
       ItemSeparatorComponent={Separator}
       contentContainerStyle={{ paddingBottom: 24 }}
       renderItem={({ item }) => <CoinItem coin={item} />}
