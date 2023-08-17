@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import CoinList from '../components/coin-list';
+import CoinList from '../coins/coin-list';
+import useDebouncedValue from './use-debounce-value';
 import { CoinsScreenProps } from '../types/navigation';
 import {
   NativeSyntheticEvent,
@@ -8,13 +9,11 @@ import {
 } from 'react-native';
 
 export default function Coins({ navigation }: CoinsScreenProps) {
-  const [searchText, setSearchText] = useState<string>();
+  const [query, setQuery] = useState<string>();
+  const debouncedQuery = useDebouncedValue(query);
 
-  const handleChangeText = (
-    e: NativeSyntheticEvent<TextInputFocusEventData>,
-  ) => {
-    console.log(e.nativeEvent.text);
-  };
+  const handleChangeText = (e: NativeSyntheticEvent<TextInputFocusEventData>) =>
+    setQuery(e.nativeEvent.text);
 
   useEffect(() => {
     navigation.setOptions({

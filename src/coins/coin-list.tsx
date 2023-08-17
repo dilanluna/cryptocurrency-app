@@ -1,5 +1,5 @@
-import Spinner from './spinner';
-import { useCoins } from '../crypto-api';
+import { useCoins } from './coins-api';
+import Spinner from '../screens/spinner';
 import { RootStackNavation } from '../types/navigation';
 import { useNavigation } from '@react-navigation/native';
 import { formatCurrency, formatPercet } from '../number-format';
