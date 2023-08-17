@@ -1,9 +1,17 @@
 import { useCoins } from './crypto-api';
-import { FlatList, Image, Text, View } from 'react-native';
 import { formatCurrency, formatPercet } from './number-format';
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 
 function Separator() {
   return <View style={{ height: 12 }} />;
+}
+
+function Spinner() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
 }
 
 function CoinItem({ coin }: { coin: CoinMarket }) {
@@ -48,7 +56,11 @@ function CoinItem({ coin }: { coin: CoinMarket }) {
 }
 
 export default function CoinList() {
-  const { data, refetch, isFetching, fetchNextPage } = useCoins();
+  const { data, refetch, isFetching, isLoading, fetchNextPage } = useCoins();
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <FlatList
@@ -56,6 +68,7 @@ export default function CoinList() {
       refreshing={isFetching}
       data={data.pages.flat()}
       ItemSeparatorComponent={Separator}
+      onEndReached={() => fetchNextPage()}
       contentContainerStyle={{ paddingBottom: 24 }}
       renderItem={({ item }) => <CoinItem coin={item} />}
       style={{
