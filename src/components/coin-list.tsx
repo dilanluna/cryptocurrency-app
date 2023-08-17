@@ -1,22 +1,20 @@
-import { useCoins } from './crypto-api';
-import { formatCurrency, formatPercet } from './number-format';
-import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
+import Spinner from './spinner';
+import { useCoins } from '../crypto-api';
+import { RootStackNavation } from '../types/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { formatCurrency, formatPercet } from '../number-format';
+import { FlatList, Image, Pressable, Text, View } from 'react-native';
 
 function Separator() {
   return <View style={{ height: 12 }} />;
 }
 
-function Spinner() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
-}
-
 function CoinItem({ coin }: { coin: CoinMarket }) {
+  const { navigate } = useNavigation<RootStackNavation>();
+
   return (
-    <View
+    <Pressable
+      onPress={() => navigate('CoinDetails', { coinId: coin.id })}
       style={{
         flexDirection: 'row',
         backgroundColor: 'white',
@@ -51,7 +49,7 @@ function CoinItem({ coin }: { coin: CoinMarket }) {
           {formatPercet(coin.price_change_percentage_1h_in_currency)}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

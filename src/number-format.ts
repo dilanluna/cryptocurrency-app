@@ -13,3 +13,11 @@ export function formatPercet(value: number) {
   });
   return formatter.format(value);
 }
+
+export function formatInteger(value: number) {
+  const formatter = new Intl.NumberFormat('es-US', {
+    style: 'decimal',
+    maximumFractionDigits: 0,
+  });
+  return formatter.format(value);
+}

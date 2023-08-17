@@ -1,6 +1,6 @@
-import CoinList from './coin-list';
 import { useEffect, useState } from 'react';
-import { CoinsScreenProps } from './types/navigation';
+import CoinList from '../components/coin-list';
+import { CoinsScreenProps } from '../types/navigation';
 import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
